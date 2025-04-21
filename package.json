@@ -1,0 +1,89 @@
+{
+  "name": "unplugin-starter",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.8.1",
+  "description": "Description.",
+  "type": "module",
+  "keywords": [
+    "unplugin",
+    "vite",
+    "webpack",
+    "rspack",
+    "rollup",
+    "rolldown",
+    "esbuild",
+    "farm"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/sxzz/unplugin-starter#readme",
+  "bugs": {
+    "url": "https://github.com/sxzz/unplugin-starter/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxzz/unplugin-starter.git"
+  },
+  "author": "三咲智子 Kevin Deng <sxzz@sxzz.moe>",
+  "funding": "https://github.com/sponsors/sxzz",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./vite": "./dist/vite.js",
+    "./webpack": "./dist/webpack.js",
+    "./rspack": "./dist/rspack.js",
+    "./rollup": "./dist/rollup.js",
+    "./rolldown": "./dist/rolldown.js",
+    "./esbuild": "./dist/esbuild.js",
+    "./farm": "./dist/farm.js",
+    "./api": "./dist/api.js",
+    "./*": "./*"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm run lint --fix",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp && pnpm publish",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "unplugin": "^2.3.2",
+    "unplugin-utils": "^0.2.4"
+  },
+  "devDependencies": {
+    "@sxzz/eslint-config": "^6.1.2",
+    "@sxzz/prettier-config": "^2.2.1",
+    "@sxzz/test-utils": "^0.5.5",
+    "@types/node": "^22.14.1",
+    "bumpp": "^10.1.0",
+    "eslint": "^9.25.0",
+    "prettier": "^3.5.3",
+    "tsdown": "^0.9.1",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.2",
+    "vitest": "^3.1.1"
+  },
+  "engines": {
+    "node": ">=18.12.0"
+  },
+  "prettier": "@sxzz/prettier-config"
+}
