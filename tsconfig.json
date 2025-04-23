@@ -1,21 +1,19 @@
 {
-  "compilerOptions": {
-    "target": "esnext",
-    "lib": ["es2022"],
-    "moduleDetection": "force",
-    "module": "preserve",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "types": ["node"],
-    "strict": true,
-    "noUnusedLocals": true,
-    "declaration": true,
-    "isolatedDeclarations": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": true,
-    "skipLibCheck": true
-  },
-  "include": ["src", "tests"],
-  "exclude": ["tests/fixtures"]
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+        "jsx": "react",
+        "lib": [
+            "dom",
+            "ESNext"
+        ],
+        "types": [
+            "react",
+            "react-dom"
+        ],
+        "module": "esnext",
+        "target": "esnext",
+        "allowSyntheticDefaultImports": true,
+        "allowImportingTsExtensions": true,
+        "noEmit": true
+    }
 }

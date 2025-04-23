@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index'
+import unplugin from '.'
 
 /**
  * Farm plugin
@@ -19,6 +19,5 @@ import { Starter } from './index'
  * }
  * ```
  */
-const farm = Starter.farm as typeof Starter.farm
+const farm = unplugin.farm as typeof unplugin.farm
 export default farm
-export { farm as 'module.exports' }

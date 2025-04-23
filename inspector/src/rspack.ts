@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index'
+import unplugin from '.'
 
 /**
  * Rspack plugin
@@ -19,6 +19,5 @@ import { Starter } from './index'
  * }
  * ```
  */
-const rspack = Starter.rspack as typeof Starter.rspack
+const rspack = unplugin.rspack as typeof unplugin.rspack
 export default rspack
-export { rspack as 'module.exports' }

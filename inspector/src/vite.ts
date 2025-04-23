@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index'
+import unplugin from '.'
 
 /**
  * Vite plugin
@@ -12,13 +12,12 @@ import { Starter } from './index'
  * @example
  * ```ts
  * // vite.config.ts
- * import Starter from 'unplugin-starter/vite'
+ * import UnpluginReactInspector from 'unplugin-UnpluginReactInspector/vite'
  *
  * export default defineConfig({
- *   plugins: [Starter()],
+ *   plugins: [UnpluginReactInspector()],
  * })
  * ```
  */
-const vite = Starter.vite as typeof Starter.vite
+const vite = unplugin.vite as typeof unplugin.vite
 export default vite
-export { vite as 'module.exports' }

@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index'
+import unplugin from '.'
 
 /**
  * Webpack plugin
@@ -19,6 +19,5 @@ import { Starter } from './index'
  * }
  * ```
  */
-const webpack = Starter.webpack as typeof Starter.webpack
+const webpack = unplugin.webpack as typeof unplugin.webpack
 export default webpack
-export { webpack as 'module.exports' }

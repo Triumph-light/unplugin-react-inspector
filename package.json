@@ -65,6 +65,10 @@
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "unplugin": "^2.3.2",
     "unplugin-utils": "^0.2.4"
   },
