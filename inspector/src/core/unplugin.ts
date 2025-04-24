@@ -4,6 +4,7 @@ import { resolveOptions, type Options } from './options'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import fs from 'node:fs'
+import compiler from './compiler'
 
 function getInspectorPath() {
     const pluginPath = path.dirname(fileURLToPath(import.meta.url)).replace(/\/\//, '/')
@@ -51,6 +52,11 @@ const UnpluginReactInspector: UnpluginInstance<Options | undefined, false> =
              * 处理react，实现元素与文件位置的映射
              */
             transform(code, id) {
+                const isJsx = id.endsWith('.jsx') || id.endsWith('.tsx')
+
+                if (isJsx) {
+                    return compiler(code, id)
+                }
                 return `// unplugin-starter injected\n${code}`
             },
 
