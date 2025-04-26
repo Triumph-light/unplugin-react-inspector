@@ -1,8 +1,12 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
+import React, { useState, useRef, useLayoutEffect, useEffect, Fragment, type ReactElement, type ReactHTMLElement } from "react";
 import "./index.less"
 
-function getData(node: Element) {
-	return node.getAttribute("data-inspector-link")
+/** 定义key 区分要监视的元素 */
+const KEY_IGNOE = 'data-inspector-ignore'
+const KEY_DATA = 'data-inspector-option'
+
+function getData(node: any) {
+	return node?.__reactProps?.[KEY_DATA] ?? node?.getAttribute?.(KEY_DATA)
 }
 
 export default function Overlay() {
@@ -15,7 +19,7 @@ export default function Overlay() {
 	const floatsRef = useRef<HTMLDivElement>(null)
 	const [linkParams, setLinkParams] = useState<{ file: string, line: string, column: string } | null>()
 
-	const getTargetNode = (e: MouseEvent) => {
+	const getTargetNode = (e: Event) => {
 		const path = e.composedPath() as Element[]
 		if (!path) {
 			return {
@@ -24,7 +28,7 @@ export default function Overlay() {
 			}
 		}
 
-		const ignoreIndex = -1
+		const ignoreIndex = path.findIndex(node => node?.hasAttribute?.(KEY_IGNOE))
 		const targetNode = path.slice(ignoreIndex + 1).find((node: Element) => getData(node))
 		if (!targetNode) {
 			return {
@@ -32,8 +36,8 @@ export default function Overlay() {
 				params: null
 			}
 		}
-		const match = getData(targetNode)?.match('_')
-		const [_, file, line, column] = match ?? []
+		const match = getData(targetNode)?.split('_')
+		const [file, line, column] = match ?? []
 		return {
 			targetNode,
 			params: match ? { file, line, column } : null
@@ -57,8 +61,10 @@ export default function Overlay() {
 	/** 开启鼠标滑动，更新对应元素信息 */
 	useEffect(() => {
 		window.addEventListener("mousemove", updateLinkPramas)
+		window.addEventListener('click', handleClick)
 		return () => {
 			window.removeEventListener("mousemove", updateLinkPramas)
+			window.removeEventListener('click', handleClick)
 		}
 	}, [])
 
@@ -70,7 +76,6 @@ export default function Overlay() {
 
 		let floatsWidth = floatsRef.current!.clientWidth ?? 0
 		let floatsHeight = floatsRef.current!.clientHeight ?? 0
-		console.log(window.innerWidth, floatsWidth, margin)
 		x = Math.max(margin, x)
 		x = Math.min(x, window.innerWidth - floatsWidth - margin)
 		if (x < floatsWidth / 2) {
@@ -90,8 +95,28 @@ export default function Overlay() {
 		width: `${position.width}px`,
 		height: `${position.height}px`,
 	}
-	return <>
-		<div>
+
+	/** 打开编辑器 */
+	const handleClick = (e: Event) => {
+		const { targetNode, params } = getTargetNode(e)
+		if (!targetNode) return
+		e.preventDefault()
+		e.stopPropagation()
+
+		const { file, line, column } = params!
+		const url = new URL(`/__open-in-editor?file=${encodeURIComponent(`${file}:${line}:${column}`)}`, import.meta.url)
+		openEditor(url, file, line, column)
+	}
+
+	const openEditor = (baseUrl: URL, file: any, line: any, column: any) => {
+		const _url = baseUrl instanceof URL ? baseUrl : `/__open-in-editor?file=${encodeURIComponent(`${file}:${line}:${column}`)}`
+		const promise = fetch(_url, { mode: 'no-cors' })
+		console.log(_url)
+		return promise
+	}
+
+	return <div {...{ [KEY_IGNOE]: true }}>
+		<div >
 			<a
 				className="vue-inspector-banner vue-inspector-card"
 				href="https://github.com/Triumph-light/unplugin-react-inspector"
@@ -103,10 +128,10 @@ export default function Overlay() {
 		</div>
 		<>
 			<div className="inspector-card" ref={floatsRef}>
-				<span>{linkParams?.file}{linkParams?.line}{linkParams?.column}</span>
+				<span>{linkParams?.file}:{linkParams?.line}:{linkParams?.column}</span>
 				<span className="tip">Click to go to the file</span>
 			</div>
 			<div className="inspector-size-indicator" style={sizeIndicatorStyle}></div>
 		</>
-	</>
+	</div>
 }

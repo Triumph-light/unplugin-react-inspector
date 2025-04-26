@@ -87,6 +87,12 @@ importers:
       '@babel/traverse':
         specifier: ^7.27.0
         version: 7.27.0
+      '@babel/types':
+        specifier: ^7.27.0
+        version: 7.27.0
+      ansis:
+        specifier: ^3.17.0
+        version: 3.17.0
     devDependencies:
       '@types/babel__generator':
         specifier: ^7.27.0

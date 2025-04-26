@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import fs from 'node:fs'
 import compiler from './compiler'
+import { bold, dim, green, yellow } from 'ansis'
 
 function getInspectorPath() {
     const pluginPath = path.dirname(fileURLToPath(import.meta.url)).replace(/\/\//, '/')
@@ -19,6 +20,8 @@ const UnpluginReactInspector: UnpluginInstance<Options | undefined, false> =
         const options = resolveOptions(rawOptions)
         const filter = createFilter(options.include, options.exclude)
 
+        // 启用通知编辑器
+        process.env.LAUNCH_EDITOR = "code"
         const name = 'unplugin-starter'
         return {
             name,
@@ -61,6 +64,15 @@ const UnpluginReactInspector: UnpluginInstance<Options | undefined, false> =
             },
 
             vite: {
+                configureServer(server) {
+                    const _printUrls = server.printUrls
+
+                    server.printUrls = () => {
+                        // const keys = normalizeComboKeyPrint(toggleComboKey)
+                        _printUrls()
+                        console.log(`  ${green('➜')}  ${bold('Vue Inspector')}: ${green(`Press  in App to toggle the Inspector`)}\n`)
+                    }
+                },
                 transformIndexHtml(html) {
                     return {
                         html,

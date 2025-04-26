@@ -1,5 +1,8 @@
 import { generate } from '@babel/generator'
 import { parse } from "@babel/parser";
+import { jsxAttribute, jsxIdentifier, stringLiteral } from '@babel/types';
+import { relative } from 'node:path'
+import { cwd } from 'node:process';
 
 // 由于babel/traverse是cjs，采用esm打包，无法处理
 const traverse = require('@babel/traverse').default
@@ -20,7 +23,14 @@ export default function compiler(sourceCode: string, id: string): string {
   traverse(ast, {
     JSXOpeningElement: {
       enter(path) {
-        console.log('visitor', path.node)
+        const node = path.node
+        const relativePath = relative(cwd(), id)
+        const line = node.loc?.start.line
+        const column = node.loc?.end.line
+        const attributes = [relativePath, line, column]
+
+        const inspectorOption = jsxAttribute(jsxIdentifier('data-inspector-option'), stringLiteral(attributes.join('_')))
+        node.attributes.unshift(inspectorOption)
       }
     }
   })
