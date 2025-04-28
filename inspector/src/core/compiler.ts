@@ -8,6 +8,7 @@ import { cwd } from 'node:process';
 const traverse = require('@babel/traverse').default
 
 export default function compiler(sourceCode: string, id: string): string {
+  console.log(id, sourceCode)
   const ast = parse(sourceCode, {
     sourceType: 'module',
     allowUndeclaredExports: true,
@@ -26,7 +27,7 @@ export default function compiler(sourceCode: string, id: string): string {
         const node = path.node
         const relativePath = relative(cwd(), id)
         const line = node.loc?.start.line
-        const column = node.loc?.end.line
+        const column = node.loc?.end.column
         const attributes = [relativePath, line, column]
 
         const inspectorOption = jsxAttribute(jsxIdentifier('data-inspector-option'), stringLiteral(attributes.join('_')))

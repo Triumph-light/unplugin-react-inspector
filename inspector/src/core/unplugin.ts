@@ -20,12 +20,9 @@ const UnpluginReactInspector: UnpluginInstance<Options | undefined, false> =
         const options = resolveOptions(rawOptions)
         const filter = createFilter(options.include, options.exclude)
 
-        // 启用通知编辑器
-        process.env.LAUNCH_EDITOR = "code"
         const name = 'unplugin-starter'
         return {
             name,
-            enforce: options.enforce || 'pre',
 
             // 处理路径
             async resolveId(id) {
@@ -64,6 +61,7 @@ const UnpluginReactInspector: UnpluginInstance<Options | undefined, false> =
             },
 
             vite: {
+                enforce: 'pre',
                 configureServer(server) {
                     const _printUrls = server.printUrls
 
