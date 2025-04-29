@@ -8,7 +8,6 @@ import { cwd } from 'node:process';
 const traverse = require('@babel/traverse').default
 
 export default function compiler(sourceCode: string, id: string): string {
-  console.log(id, sourceCode)
   const ast = parse(sourceCode, {
     sourceType: 'module',
     allowUndeclaredExports: true,
