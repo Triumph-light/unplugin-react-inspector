@@ -1,5 +1,6 @@
 import React, { useState, useRef, useLayoutEffect, useEffect } from "react";
 import "./index.less"
+import options from 'virtual:react-inspector-options'
 
 /** 定义key 区分要监视的元素 */
 const KEY_IGNOE = 'data-inspector-ignore'
