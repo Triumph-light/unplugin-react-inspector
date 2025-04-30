@@ -1,8 +1,5 @@
 {
-  "name": "unplugin-starter",
-  "version": "0.0.0",
   "packageManager": "pnpm@10.8.1",
-  "description": "Description.",
   "type": "module",
   "keywords": [
     "unplugin",
@@ -15,54 +12,16 @@
     "farm"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/sxzz/unplugin-starter#readme",
-  "bugs": {
-    "url": "https://github.com/sxzz/unplugin-starter/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sxzz/unplugin-starter.git"
-  },
-  "author": "三咲智子 Kevin Deng <sxzz@sxzz.moe>",
-  "funding": "https://github.com/sponsors/sxzz",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "exports": {
-    ".": "./dist/index.js",
-    "./vite": "./dist/vite.js",
-    "./webpack": "./dist/webpack.js",
-    "./rspack": "./dist/rspack.js",
-    "./rollup": "./dist/rollup.js",
-    "./rolldown": "./dist/rolldown.js",
-    "./esbuild": "./dist/esbuild.js",
-    "./farm": "./dist/farm.js",
-    "./api": "./dist/api.js",
-    "./*": "./*"
-  },
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
+  "author": "Triumph-light",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "lint": "eslint --cache .",
-    "lint:fix": "pnpm run lint --fix",
-    "build": "tsdown",
-    "dev": "tsdown --watch",
-    "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "release": "bumpp && pnpm publish",
-    "prepublishOnly": "pnpm run build"
+    "play:demo": "pnpm run -r --filter=./examples dev",
+    "lint": "eslint --fix --ext .js,.ts,.tsx,.jsx .",
+    "dev": "pnpm run -r --filter=./inspector dev",
+    "build": "pnpm run -r --filter=./inspector build",
+    "release": "pnpm build && changeset && changeset version && changeset publish"
   },
   "dependencies": {
     "@types/react": "^19.1.2",
