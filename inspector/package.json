@@ -1,6 +1,6 @@
 {
   "name": "unplugin-react-next-inspector",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "A unplugin which provides the ability that to jump to the local IDE when you click the element of browser automatically.",
   "type": "module",
   "main": "dist/index.cjs",

@@ -1,16 +1,6 @@
 # unplugin-react-next-inspector
 
-## 1.0.3
-### Patch Changes
+## 1.0.0
+### Major Changes
 
-- release
-
-## 1.0.2
-### Patch Changes
-
-- release
-
-## 1.0.1
-### Patch Changes
-
-- release monorepo
+- 发布正式版本
