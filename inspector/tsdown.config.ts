@@ -6,5 +6,4 @@ export default defineConfig({
   target: 'node18.12',
   clean: true,
   dts: true,
-  minify: true,
 })
