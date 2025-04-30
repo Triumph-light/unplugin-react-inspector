@@ -1,7 +1,7 @@
 {
   "name": "unplugin-react-inspector",
   "version": "1.0.0",
-  "description": "",
+  "description": "A unplugin which provides the ability that to jump to the local IDE when you click the element of browser automatically.",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -16,9 +16,17 @@
     "release": "bumpp && pnpm publish",
     "prepublishOnly": "pnpm run build"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["react", "reactjs", "vite", "unplugin", "inspector", "vite-plugin", "plugin", "debug"],
+  "author": "Triumph-light",
+  "license": "MIT",
+  "homepage": "https://github.com/Triumph-light/unplugin-react-inspector/README.md",
+  "bugs": {
+    "url": "https://github.com/Triumph-light/unplugin-react-inspector/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Triumph-light/unplugin-react-inspector.git"
+  },
   "packageManager": "pnpm@10.8.1",
   "exports": {
     ".": {
