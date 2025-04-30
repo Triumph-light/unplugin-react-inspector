@@ -13,8 +13,6 @@
     "dev": "tsdown --watch",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "release": "bumpp && pnpm publish",
-    "prepublishOnly": "pnpm run build"
   },
   "keywords": [
     "react",
