@@ -20,8 +20,9 @@ export default function Overlay() {
 	const floatsRef = useRef<HTMLDivElement>(null)
 	const [linkParams, setLinkParams] = useState<{ file: string, line: string, column: string } | null>()
 	const [overlayVisible, setOverlayVisible] = useState(false)
-	const enable = useRef(false)
+	const enable = useRef(options.enable)
 
+	const toggleCombo = options.toggleComboKey?.toLowerCase?.()?.split?.('-') ?? false
 	const getTargetNode = (e: Event) => {
 		const path = e.composedPath() as Element[]
 		if (!path) {
@@ -64,9 +65,21 @@ export default function Overlay() {
 		}
 	}
 
+	const isActiveKey = (key: string, event: KeyboardEvent) => {
+		switch (key) {
+			case 'meta':
+			case 'control':
+			case 'shift':
+				return event.getModifierState(key.charAt(0).toUpperCase() + key.slice(1))
+			default:
+				return key.toLowerCase() === event.key
+		}
+	}
+
 	/** 切换inspector启用状态 */
 	const handleKeyDown = (e: KeyboardEvent) => {
-		if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+		const isCombo = toggleCombo?.every((key: string) => isActiveKey(key, e))
+		if (isCombo) {
 			toggleEnable()
 		}
 	}
@@ -86,7 +99,7 @@ export default function Overlay() {
 
 	/** 开启鼠标滑动，更新对应元素信息 */
 	useEffect(() => {
-		document.body.addEventListener('keydown', handleKeyDown)
+		toggleCombo && document.body.addEventListener('keydown', handleKeyDown)
 		toggleEventListener()
 	}, [])
 
@@ -144,16 +157,16 @@ export default function Overlay() {
 	}
 
 	return <div {...{ [KEY_IGNOE]: true }}>
-		<div>
+		{/* <div>
 			<a
-				className="vue-inspector-banner vue-inspector-card"
+				className="inspector-banner inspector-card"
 				href="https://github.com/Triumph-light/unplugin-react-inspector"
 				target="_blank"
 			>
-				<div>vite-plugin-vue-inspector</div>
+				<div>vite-plugin-react-inspector</div>
 				<div className="tip">Click on a element › Open IDE › Link to File</div>
 			</a>
-		</div>
+		</div> */}
 		{overlayVisible && <>
 			<div className="inspector-card" ref={floatsRef}>
 				<span>{linkParams?.file}:{linkParams?.line}:{linkParams?.column}</span>

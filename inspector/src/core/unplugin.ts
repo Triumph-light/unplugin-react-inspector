@@ -10,7 +10,6 @@ import type { InspectorOptions } from './type'
 
 function getInspectorPath() {
     const pluginPath = path.dirname(fileURLToPath(import.meta.url)).replace(/\/\//, '/')
-    console.log(`[unplugin-react-inspector] pluginPath: ${pluginPath}`)
     return pluginPath.replace(/\/dist$/, '/src/core')
 }
 
@@ -22,14 +21,19 @@ const DEFAULT_INSPECTOR_OPTIONS: InspectorOptions = {
     exclude: [/\/node_modules\//]
 }
 
-const UnpluginReactInspector: UnpluginInstance<InspectorOptions, false> =
+const UnpluginReactInspector: UnpluginInstance<InspectorOptions | undefined, false> =
     // 创建插件实例
-    createUnplugin((rawOptions: InspectorOptions = DEFAULT_INSPECTOR_OPTIONS) => {
+    createUnplugin((rawOptions: InspectorOptions | undefined = DEFAULT_INSPECTOR_OPTIONS) => {
         const inspectorPath = getInspectorPath()
         const options = {
             ...DEFAULT_INSPECTOR_OPTIONS,
             ...rawOptions
         } as Required<InspectorOptions>
+
+        if (options.launchEditor) {
+            process.env.LAUNCH_EDITOR = options.launchEditor
+        }
+
         const filter = createFilter(options.include, options.exclude)
 
         const name = 'unplugin-starter'
@@ -43,7 +47,6 @@ const UnpluginReactInspector: UnpluginInstance<InspectorOptions, false> =
                 }
                 else if (id.startsWith('virtual:react-inspector-path:')) {
                     const resolved = id.replace('virtual:react-inspector-path:', `${inspectorPath}/`)
-                    console.log('resolved: ', resolved)
                     return resolved
                 }
             },
