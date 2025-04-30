@@ -76,7 +76,7 @@ importers:
       less:
         specifier: ^4.3.0
         version: 4.3.0
-      unplugin-react-inspector:
+      unplugin-react-next-inspector:
         specifier: workspace:*
         version: link:../inspector
 

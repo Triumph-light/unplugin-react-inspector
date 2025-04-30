@@ -12,7 +12,7 @@
     "url": "git+https://github.com/Triumph-light/unplugin-react-inspector.git"
   },
   "scripts": {
-    "play:demo": "pnpm run -r --filter=./examples dev",
+    "play:demo": "pnpm --filter=./examples dev",
     "lint": "eslint --fix --ext .js,.ts,.tsx,.jsx .",
     "dev": "pnpm run -r --filter=./inspector dev",
     "build": "pnpm run -r --filter=./inspector build",
