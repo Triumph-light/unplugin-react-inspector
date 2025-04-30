@@ -1,4 +1,4 @@
-# unplugin-react-inspector 
+# unplugin-react-next-inspector 
 
 [English](./README.md) | [简体中文](./README.zh-CN.md)
 
@@ -11,7 +11,7 @@ now just support vite.
 ## Usage
 
 ```bash
-npm i -D unplugin-react-inspector
+npm i -D unplugin-react-next-inspector
 ```
 
 <details>
@@ -19,7 +19,7 @@ npm i -D unplugin-react-inspector
 
 ```ts
 // vite.config.ts
-import Starter from 'unplugin-react-inspector/vite'
+import Starter from 'unplugin-react-next-inspector/vite'
 
 export default defineConfig({
   plugins: [Starter()],
@@ -33,7 +33,7 @@ export default defineConfig({
 
 ```ts
 // rollup.config.js
-import Starter from 'unplugin-react-inspector/rollup'
+import Starter from 'unplugin-react-next-inspector/rollup'
 
 export default {
   plugins: [Starter()],
@@ -47,7 +47,7 @@ export default {
 
 ```ts
 // rolldown.config.js
-import Starter from 'unplugin-react-inspector/rolldown'
+import Starter from 'unplugin-react-next-inspector/rolldown'
 
 export default {
   plugins: [Starter()],
@@ -61,7 +61,7 @@ export default {
 
 ```ts
 import { build } from 'esbuild'
-import Starter from 'unplugin-react-inspector/esbuild'
+import Starter from 'unplugin-react-next-inspector/esbuild'
 
 build({
   plugins: [Starter()],
@@ -75,7 +75,7 @@ build({
 
 ```js
 // webpack.config.js
-import Starter from 'unplugin-react-inspector/webpack'
+import Starter from 'unplugin-react-next-inspector/webpack'
 
 export default {
   /* ... */
@@ -90,7 +90,7 @@ export default {
 
 ```ts
 // rspack.config.js
-import Starter from 'unplugin-react-inspector/rspack'
+import Starter from 'unplugin-react-next-inspector/rspack'
 
 export default {
   /* ... */
@@ -133,7 +133,7 @@ export interface InspectorOptions {
 ```
 
 ### example
-[Demo](https://github.com/Triumph-light/unplugin-react-inspector/tree/master/examples)
+[Demo](https://github.com/Triumph-light/unplugin-react-next-inspector/tree/master/examples)
 
 ## 🔌  Configuration IDE / Editor
 
