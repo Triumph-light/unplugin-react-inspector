@@ -12,7 +12,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "test": "vitest",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "react",
