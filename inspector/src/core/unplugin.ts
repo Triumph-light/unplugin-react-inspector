@@ -8,8 +8,12 @@ import { bold, green } from 'ansis'
 import { normalizeComboKeyPrint } from './utils'
 import type { InspectorOptions } from './type'
 
+function normalizePath(path: string) {
+    return path.replace(/\\/g, '/')
+}
+
 function getInspectorPath() {
-    const pluginPath = path.dirname(fileURLToPath(import.meta.url)).replace(/\/\//, '/')
+    const pluginPath = normalizePath(path.dirname(fileURLToPath(import.meta.url)))
     return pluginPath.replace(/\/dist$/, '/src/core')
 }
 
