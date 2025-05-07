@@ -1,5 +1,4 @@
 import { createUnplugin, type UnpluginInstance } from 'unplugin'
-import { createFilter } from 'unplugin-utils'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import fs from 'node:fs'
@@ -21,8 +20,6 @@ const DEFAULT_INSPECTOR_OPTIONS: InspectorOptions = {
     enabled: false,
     toggleComboKey: process.platform === 'darwin' ? 'meta-shift' : 'control-shift',
     launchEditor: process.env.LAUNCH_EDITOR ?? 'code',
-    include: [/\.[cm]?[jt]sx?$/],
-    exclude: [/\/node_modules\//]
 }
 
 const UnpluginReactInspector: UnpluginInstance<InspectorOptions | undefined, false> =
@@ -37,8 +34,6 @@ const UnpluginReactInspector: UnpluginInstance<InspectorOptions | undefined, fal
         if (options.launchEditor) {
             process.env.LAUNCH_EDITOR = options.launchEditor
         }
-
-        const filter = createFilter(options.include, options.exclude)
 
         const name = 'unplugin-starter'
         return {
@@ -69,10 +64,6 @@ const UnpluginReactInspector: UnpluginInstance<InspectorOptions | undefined, fal
                 }
             },
 
-            transformInclude(id) {
-                return filter(id)
-            },
-
             /**
              * 处理react，实现元素与文件位置的映射
              */
@@ -82,7 +73,6 @@ const UnpluginReactInspector: UnpluginInstance<InspectorOptions | undefined, fal
                 if (isJsx) {
                     return compiler(code, id)
                 }
-                return `// unplugin-starter injected\n${code}`
             },
 
             vite: {
