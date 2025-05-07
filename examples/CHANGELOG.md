@@ -1,12 +1,11 @@
-# unplugin-react-next-inspector
+# examples
 
-## 1.0.2
+## 0.0.2
 ### Patch Changes
 
 - optimze bundle
 
-## 1.0.1
+## 0.0.1
 ### Patch Changes
 
 - optimize bundle
-
