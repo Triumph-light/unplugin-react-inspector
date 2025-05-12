@@ -4,7 +4,7 @@ import type { RolldownPlugin } from 'unplugin';
 
 export default defineConfig({
   entry: ['./src/*.ts'],
-  format: ['esm', 'cjs'],
+  format: ['esm'],
   target: 'node18.12',
   clean: true,
   dts: true,
